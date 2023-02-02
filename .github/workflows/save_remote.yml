@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: save_devel
     - name: Save Tasmota development firmware
       run: |
         git config --local user.name "Github BUILD"
@@ -20,8 +23,8 @@ jobs:
         git switch -c work
         git merge Tasmota/main --allow-unrelated-histories &> status.txt
         echo "$(<status.txt)"
-    - name: Push updates of latest Tasmota development to repo
+    - name: Push Tasmota development firmware to repo
       uses: ad-m/github-push-action@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        branch: 'main'
+        branch: 'save_devel'
