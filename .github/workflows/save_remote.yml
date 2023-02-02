@@ -13,9 +13,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-        ref: save_firmware
     - name: Checkout Tasmota firmware repo
       uses: actions/checkout@v3
       with:
@@ -24,4 +21,8 @@ jobs:
     - name: Save firmware in this repo
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-       commit_message: Stubs updated
+       commit_message: Tasmota firmware repo backup
+       branch: save_firmware
+       status_options: '--untracked-files=no'
+       push_options: '--force'
+       create_branch: true
