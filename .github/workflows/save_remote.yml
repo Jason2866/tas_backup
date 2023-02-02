@@ -11,20 +11,13 @@ jobs:
   firmware_pull:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         ref: save_firmware
-    - name: Save Tasmota firmware
-      run: |
-        git config --local user.name "Github BUILD"
-        git config --local user.email github-actions@github.com
-        git remote add -f Tasmota "https://github.com/arendst/Tasmota-firmware.git" --track main
-        git switch -c work
-        git merge Tasmota/main --allow-unrelated-histories &> status.txt
-        echo "$(<status.txt)"
-    - name: Push Tasmota firmware to repo
-      uses: ad-m/github-push-action@master
+    - name: Checkout Tasmota firmware repo
+      uses: actions/checkout@v3
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        branch: 'save_firmware'
+       repository: arendst/Tasmota-firmware
+       path: main
