@@ -20,16 +20,16 @@ jobs:
        path: main
     - name: Add files to commit
       run: |
-        git config --local user.name "Github BUILD"
-        git config --local user.email github-actions@github.com
-        git switch -c work
-        git merge arendst/Tasmota-firmware --allow-unrelated-histories &> status.txt
-        echo "$(<status.txt)"
+        # git config --local user.name "My GitHub Actions Bot"
+        # git config --local user.email my-github-actions-bot@example.org
+        # git switch -c work
     - name: Save firmware in this repo
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
        commit_message: Tasmota firmware repo backup
        branch: save_firmware
+       repository: .
+       skip_dirty_check: true
        status_options: '--untracked-files=no'
        push_options: '--force'
        create_branch: true
