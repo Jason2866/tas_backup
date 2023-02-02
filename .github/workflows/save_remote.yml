@@ -18,6 +18,13 @@ jobs:
       with:
        repository: arendst/Tasmota-firmware
        path: main
+    - name: Add files to commit
+      run: |
+        git config --local user.name "Github BUILD"
+        git config --local user.email github-actions@github.com
+        git switch -c work
+        git merge arendst/Tasmota-firmware --allow-unrelated-histories &> status.txt
+        echo "$(<status.txt)"
     - name: Save firmware in this repo
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
