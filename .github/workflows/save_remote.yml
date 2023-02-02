@@ -14,16 +14,16 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-        ref: save_devel
-    - name: Save Tasmota development firmware
+        ref: save_firmware
+    - name: Save Tasmota firmware
       run: |
         git config --local user.name "Github BUILD"
         git config --local user.email github-actions@github.com
-        git remote add -f Tasmota "https://github.com/tasmota/Tasmota-firmware-archive01.git" --track main
+        git remote add -f Tasmota "https://github.com/arendst/Tasmota-firmware.git" --track main
         git switch -c work
         git merge Tasmota/main --allow-unrelated-histories &> status.txt
         echo "$(<status.txt)"
-    - name: Push Tasmota development firmware to repo
+    - name: Push Tasmota firmware to repo
       uses: ad-m/github-push-action@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
