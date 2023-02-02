@@ -18,6 +18,9 @@ jobs:
       with:
        repository: arendst/Tasmota-firmware
        path: main
+    - name: Add files to commit
+      run: |
+        git add -A
     - name: Save firmware in this repo
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
